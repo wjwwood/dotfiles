@@ -5,3 +5,20 @@ alias rosdiamondback='source /opt/ros/diamondback/setup.bash'
 alias roslocal='source ~/devel/ros/setup.bash'
 alias rviz='rosrun rviz rviz'
 alias xacro='rosrun xacro xacro.py'
+
+alias rosh='rosrun rosh rosh'
+
+
+rospython ()
+{
+    if [[ -z $1 ]]; then
+        if [[ -f ./manifest.xml ]]; then
+            pkgname=`basename \`pwd\``;
+            ipython -i -c "import roslib; roslib.load_manifest('$pkgname')";
+        else
+            ipython;
+        fi;
+    else
+        ipython -i -c "import roslib; roslib.load_manifest('$1')";
+    fi
+}
