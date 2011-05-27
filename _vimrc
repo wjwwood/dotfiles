@@ -28,6 +28,8 @@ set backspace=indent,eol,start
 set title
 if exists("&relativenumber")
     set relativenumber
+else
+    set number
 endif
 
 set ls=2
@@ -92,9 +94,6 @@ set tags=~/mytags
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 
-set pumheight=6
-set completeopt=menuone,longest,preview
-
 " NERD Tree
 map <leader>n :NERDTreeToggle<cr>
 let NERDTreeIgnore=['.vim$', '\~$', '.*\.pyc$']
@@ -118,9 +117,6 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows= 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
-
-
-
 
 " Quickfix:
 nmap <leader>c :copen<CR>

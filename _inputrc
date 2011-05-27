@@ -1,11 +1,11 @@
-set editing-mode vi
+#Set editing-mode vi
 
 # Adds punctuation as word delimiters
 set bind-tty-special-chars off
 
 # Completion Options
 set page-completions on
-set completion-ignore-case on
+set completion-ignore-case off
 set completion-query-items 200
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
@@ -32,4 +32,4 @@ $endif
 
 # IPython needs this to appear at the bottom of the
 # file for clear-screen to work
-set keymap vi
+#set keymap vi
