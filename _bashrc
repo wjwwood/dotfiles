@@ -28,7 +28,7 @@ shopt -u mailwarn                   # Don't tell me about mail, please.
 shopt -s no_empty_cmd_completion    # Don't complete on an empty line.
 shopt -s cdable_vars
 
-unset MAILCHECK                     # Don't tell me about mail, please.
+unset MAILCHECK                     # Dont tell me about mail, please.
 
 #----------------------
 # PATH
