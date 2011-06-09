@@ -1,5 +1,5 @@
 ROSVERSION=diamondback
-source ~/devel/ros/$ROSVERSION/setup.bash
+source $HOME/devel/ros/$ROSVERSION/setup.bash
 
 alias rosenv='env | grep ROS'
 alias rosdiamondback='source /opt/ros/diamondback/setup.bash'
@@ -10,8 +10,7 @@ alias xacro='rosrun xacro xacro.py'
 alias rosh='rosrun rosh rosh'
 
 
-rospython ()
-{
+rosipython () {
     if [[ -z $1 ]]; then
         if [[ -f ./manifest.xml ]]; then
             pkgname=`basename \`pwd\``;
