@@ -1,6 +1,6 @@
 [user]
-    name = Michael Carroll
-    email = carroll.michael@gmail.com
+    name = William Woodall
+    email = wjwwood@gmail.com
 [core]
     pager = cat
     editor = vim
@@ -26,5 +26,3 @@
     interactive = auto
     status = auto
 
-[diff]
-    tool = vimdiff
