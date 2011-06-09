@@ -1,4 +1,4 @@
-${ROSVERSION=diamondback}
+ROSVERSION=diamondback
 source ~/devel/ros/$ROSVERSION/setup.bash
 
 alias rosenv='env | grep ROS'

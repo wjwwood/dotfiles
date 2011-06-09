@@ -105,7 +105,7 @@ export CLICOLOR="yes"
 # LS
 #-------------------
 
-LS_COMMON="-hBG --color"
+LS_COMMON="-hBG"
 
 dircolors="$(type -P gdircolors dircolors | head -1)"
 test -n "$dircolors" && {
@@ -241,5 +241,5 @@ test -r $HOME/.rosrc && . $HOME/.rosrc
 # Tell me something nifty at login
 test -n "$INTERACTIVE" -a -n "$LOGIN" && {
     uname -npsr
-    uptime
+    uptime 2> /dev/null
 }
