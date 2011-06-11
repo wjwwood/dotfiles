@@ -1,3 +1,7 @@
 vim/vim/tmp/*
 .redcar
 *~
+_vim/.vim
+_nano/.nano
+_bash_completion.d/.bash_completion.d
+_scripts/.scripts
