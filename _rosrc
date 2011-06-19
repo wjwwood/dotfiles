@@ -1,5 +1,8 @@
 ROSVERSION=diamondback
-source $HOME/devel/ros/$ROSVERSION/setup.bash
+if [ -d $HOME/devel/ros/$ROSVERSION/ ]; then
+    source $HOME/devel/ros/$ROSVERSION/setup.bash
+    export ROS_PACKAGE_PATH=$HOME/devel/ros/$ROSVERSION/stacks:$ROS_PACKAGE_PATH
+fi
 
 alias rosenv='env | grep ROS'
 alias rosdiamondback='source /opt/ros/diamondback/setup.bash'

@@ -14,6 +14,9 @@
 # System bashrc
 test -r /etc/bashrc && . /etc/bashrc
 
+# Aliases
+source ~/.bash_aliases
+
 # Notify immedetely
 set -o notify
 

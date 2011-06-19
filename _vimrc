@@ -3,6 +3,8 @@ filetype plugin indent on
 
 set nocompatible
 
+set notitle
+
 " Prevent modeline security exploits
 set modelines=0
 
@@ -25,7 +27,6 @@ set visualbell
 set cursorline
 set ttyfast
 set backspace=indent,eol,start
-set title
 if exists("&relativenumber")
     set relativenumber
 else
