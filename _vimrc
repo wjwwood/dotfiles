@@ -125,6 +125,9 @@ nmap <leader>cc :cclose<CR>
 
 " MiniBufExplorer
 map <leader>b :MiniBufExplorer<CR>
+map <leader>l :MBEbn<CR>
+map <leader>h :MBEbp<CR>
+map <leader>w :bd<CR>
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapwindowNavVim = 1
