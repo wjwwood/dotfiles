@@ -136,7 +136,8 @@ alias dir="ls"
 
 source $HOME/.scripts/ps1_functions.sh
 
-ps1_set --prompt ∫ --notime --noseparator
+#ps1_set --prompt ∫ --notime --noseparator
+ps1_set --prompt ∫ --notime 'S\:\ '
 
 #----------------------
 # Useful functions
@@ -240,6 +241,9 @@ export PYTHONSTARTUP
 
 # ROS Stuff
 test -r $HOME/.rosrc && . $HOME/.rosrc
+
+# MORSE Stuff
+test -r $HOME/.morserc && . $HOME/.morserc
 
 # Tell me something nifty at login
 test -n "$INTERACTIVE" -a -n "$LOGIN" && {
