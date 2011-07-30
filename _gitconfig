@@ -1,6 +1,6 @@
 [user]
-    name = William Woodall
-    email = wjwwood@gmail.com
+	name = William Woodall
+	email = wjwwood@gmail.com
 [core]
     pager = cat
     editor = vim
