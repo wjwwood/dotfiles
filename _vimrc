@@ -27,11 +27,11 @@ set visualbell
 set cursorline
 set ttyfast
 set backspace=indent,eol,start
-if exists("&relativenumber")
-    set relativenumber
-else
-    set number
-endif
+" if exists("&relativenumber")
+"    set relativenumber
+" else
+set number
+" endif
 
 set ls=2
 set vb t_vb=

@@ -85,10 +85,9 @@ HAVE_GVIM=$(command -v gvim)
 HAVE_NANO=$(command -v nano)
 HAVE_MATE=$(command -v mate)
 
-# test -n "$HAVE_VIM" && EDITOR=vim || EDITOR=vi
+test -n "$HAVE_VIM" && EDITOR=vim || EDITOR=vi
 # test -n "$HAVE_VIM" && EDITOR=nano || EDITOR=vi
 # test -n "$HAVE_MATE" && EDITOR=mate || EDITOR=nano
-EDITOR=nano
 export EDITOR
 
 # PAGER
@@ -256,24 +255,12 @@ _expand() {
 # Closing Notes/User Specific
 # -------------------------
 
-# # Python interactive shell stuff
-# PYTHONSTARTUP=~/.pythonrc.py
-# export PYTHONSTARTUP
-
 # ROS Stuff
-# test -r $HOME/.rosrc && . $HOME/.rosrc
-
-# MORSE Stuff
-test -r $HOME/.morserc && . $HOME/.morserc
+test -r $HOME/.rosrc && . $HOME/.rosrc
 
 # Tell me something nifty at login
 test -n "$INTERACTIVE" -a -n "$LOGIN" && {
     uname -npsr
     uptime 2> /dev/null
 }
-# export PATH="/usr/local/share/python:/usr/local/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PKG_CONFIG_PATH="/usr/local/share/pkgconfig:$PKG_CONFIG_PATH"
-export PYTHONPATH="/usr/local/lib/python:/usr/local/lib/python2.7/site-packages/:$PYTHONPATH"
-# export PYTHONPATH="/Library/Python/2.7:/usr/local/lib/python:$PYTHONPATH"
-source ~/devel/ros/setup.bash
+
