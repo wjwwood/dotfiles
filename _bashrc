@@ -85,10 +85,13 @@ HAVE_GVIM=$(command -v gvim)
 HAVE_NANO=$(command -v nano)
 HAVE_MATE=$(command -v mate)
 
-# test -n "$HAVE_VIM" && EDITOR=vim || EDITOR=vi
+test -n "$HAVE_VIM" && EDITOR=vim || EDITOR=vi
 # test -n "$HAVE_VIM" && EDITOR=nano || EDITOR=vi
 # test -n "$HAVE_MATE" && EDITOR=mate || EDITOR=nano
+<<<<<<< HEAD
 EDITOR=vim
+=======
+>>>>>>> 1faa16b8fb32dc4c5fb871d32fa241cdc85dc4bd
 export EDITOR
 
 # PAGER
@@ -256,15 +259,8 @@ _expand() {
 # Closing Notes/User Specific
 # -------------------------
 
-# # Python interactive shell stuff
-# PYTHONSTARTUP=~/.pythonrc.py
-# export PYTHONSTARTUP
-
 # ROS Stuff
-# test -r $HOME/.rosrc && . $HOME/.rosrc
-
-# MORSE Stuff
-#test -r $HOME/.morserc && . $HOME/.morserc
+test -r $HOME/.rosrc && . $HOME/.rosrc
 
 # Tell me something nifty at login
 test -n "$INTERACTIVE" -a -n "$LOGIN" && {
@@ -272,6 +268,7 @@ test -n "$INTERACTIVE" -a -n "$LOGIN" && {
     uptime 2> /dev/null
 }
 
+<<<<<<< HEAD
 export PATH=~/bin:$PATH
 
 export PATH=/usr/local/bin:$PATH
@@ -285,3 +282,5 @@ add-ros-pkg-path () {
 }
 
 source /usr/share/git-core/git-completion.bash
+=======
+>>>>>>> 1faa16b8fb32dc4c5fb871d32fa241cdc85dc4bd

@@ -1,6 +1,3 @@
-ROSVERSION=electric
-#ROSVERSION=diamondback
-
 if [ -d $HOME/devel/ros/$ROSVERSION/ ]; then
     source $HOME/devel/ros/$ROSVERSION/setup.bash
     export ROS_PACKAGE_PATH=$HOME/devel/ros/$ROSVERSION/stacks:$ROS_PACKAGE_PATH
@@ -8,13 +5,8 @@ if [ -d $HOME/devel/ros/$ROSVERSION/ ]; then
 fi
 
 alias rosenv='env | grep ROS'
-alias rosdiamondback='source /opt/ros/diamondback/setup.bash'
-alias roslocal='source ~/devel/ros/diamondback/setup.bash'
 alias rviz='rosrun rviz rviz'
 alias xacro='rosrun xacro xacro.py'
-
-alias rosh='rosrun rosh rosh'
-
 
 rosipython () {
     if [[ -z $1 ]]; then
