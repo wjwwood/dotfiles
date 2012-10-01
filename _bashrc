@@ -12,26 +12,26 @@
 #---------------------------
 
 # System bashrc
-test -r /etc/bashrc && . /etc/bashrc
+#test -r /etc/bashrc && . /etc/bashrc
 
 # Aliases
-source ~/.bash_aliases
+#source ~/.bash_aliases
 
 # Notify immedetely
-set -o notify
+#set -o notify
 
 # Shell options
-shopt -s cdspell                    # Check cd spelling
-shopt -s extglob                    # Extended pattern matching
-shopt -s histappend                 # Append history on exit
-set +o histexpand
-shopt -s hostcomplete               # Attempt to complete '@'
-shopt -s interactive_comments       # Allow comments in interactive
-shopt -u mailwarn                   # Don't tell me about mail, please.
-shopt -s no_empty_cmd_completion    # Don't complete on an empty line.
-shopt -s cdable_vars
+#shopt -s cdspell                    # Check cd spelling
+#shopt -s extglob                    # Extended pattern matching
+#shopt -s histappend                 # Append history on exit
+#set +o histexpand
+#shopt -s hostcomplete               # Attempt to complete '@'
+#shopt -s interactive_comments       # Allow comments in interactive
+#shopt -u mailwarn                   # Don't tell me about mail, please.
+#shopt -s no_empty_cmd_completion    # Don't complete on an empty line.
+#shopt -s cdable_vars
 
-unset MAILCHECK                     # Dont tell me about mail, please.
+#unset MAILCHECK                     # Dont tell me about mail, please.
 
 #----------------------
 # PATH
@@ -88,7 +88,7 @@ HAVE_MATE=$(command -v mate)
 # test -n "$HAVE_VIM" && EDITOR=vim || EDITOR=vi
 # test -n "$HAVE_VIM" && EDITOR=nano || EDITOR=vi
 # test -n "$HAVE_MATE" && EDITOR=mate || EDITOR=nano
-EDITOR=nano
+EDITOR=vim
 export EDITOR
 
 # PAGER
@@ -191,24 +191,24 @@ function ii()   # Get current host related info.
 # -------------------------
 # Bash Completion 
 # -------------------------
-test -z "$BASH_COMPLETION" && {
-    bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
-    test -n "$PS1" && test $bmajor -gt 1 && {
-        # search for a bash_completion file to source
-        for f in /usr/local/etc/bash_completion \
-            /usr/pkg/etc/bash_completion \
-            /opt/local/etc/bash_completion \
-            /etc/bash_completion \
-            ~/.bash_completion
-        do
-            test -f $f && {
-                . $f
-                break
-            }
-        done
-    }
-    unset bash bmajor bminor f
-}
+#test -z "$BASH_COMPLETION" && {
+#    bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
+#    test -n "$PS1" && test $bmajor -gt 1 && {
+#        # search for a bash_completion file to source
+#        for f in /usr/local/etc/bash_completion \
+#            /usr/pkg/etc/bash_completion \
+#            /opt/local/etc/bash_completion \
+#            /etc/bash_completion \
+#            ~/.bash_completion
+#        do
+#            test -f $f && {
+#                . $f
+#                break
+#            }
+#        done
+#    }
+#    unset bash bmajor bminor f
+#}
 
 _expand() {
     return 0
@@ -264,16 +264,24 @@ _expand() {
 # test -r $HOME/.rosrc && . $HOME/.rosrc
 
 # MORSE Stuff
-test -r $HOME/.morserc && . $HOME/.morserc
+#test -r $HOME/.morserc && . $HOME/.morserc
 
 # Tell me something nifty at login
 test -n "$INTERACTIVE" -a -n "$LOGIN" && {
     uname -npsr
     uptime 2> /dev/null
 }
-# export PATH="/usr/local/share/python:/usr/local/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PKG_CONFIG_PATH="/usr/local/share/pkgconfig:$PKG_CONFIG_PATH"
-export PYTHONPATH="/usr/local/lib/python:/usr/local/lib/python2.7/site-packages/:$PYTHONPATH"
-# export PYTHONPATH="/Library/Python/2.7:/usr/local/lib/python:$PYTHONPATH"
-source ~/devel/ros/setup.bash
+
+export PATH=~/bin:$PATH
+
+export PATH=/usr/local/bin:$PATH
+export PYTHONPATH="/usr/local/lib/wxPython-2.9.2.1/lib/python2.7/site-packages:/usr/local/lib/python2.7/site-packages:/usr/local/lib/python:$PYTHONPATH"
+export PATH=/usr/local/lib/wxPython/bin:$PATH
+export ROS_OS_OVERRIDE=osxbrew:lion
+#source /Users/william/devel/vis_exp/setup.bash
+
+add-ros-pkg-path () {
+    export ROS_PACKAGE_PATH=$PWD:$ROS_PACKAGE_PATH;
+}
+
+source /usr/share/git-core/git-completion.bash

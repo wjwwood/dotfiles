@@ -26,3 +26,6 @@
     interactive = auto
     status = auto
 
+[github]
+	user = wjwwood
+	token = 1329135968a3805082589a9b6e0806cf
