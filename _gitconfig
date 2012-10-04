@@ -1,9 +1,9 @@
 [user]
 	name = William Woodall
 	email = wjwwood@gmail.com
+
 [core]
     pager = cat
-    editor = vim
 
 [alias]
     gl  = log -10 --color=always --all --graph --topo-order --pretty='format: %Cgreen%h%Creset %s%Cred%d%Creset%n'
@@ -25,7 +25,3 @@
     diff = auto
     interactive = auto
     status = auto
-
-[github]
-	user = wjwwood
-	token = 1329135968a3805082589a9b6e0806cf

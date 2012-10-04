@@ -1,51 +1,43 @@
 #!/usr/bin/env bash
 
-: ${HOME=~}
-: ${LOGNAME=$(id -un)}
-: ${UNAME=$(uname)}
-
-: ${HOSTFILE=~/.ssh/known_hosts}
-: ${INPUTRC=~/.inputrc}
-
 #---------------------------
 # Shell Options
 #---------------------------
 
 # System bashrc
-#test -r /etc/bashrc && . /etc/bashrc
+test -r /etc/bashrc && . /etc/bashrc
 
 # Aliases
-#source ~/.bash_aliases
+source ~/.bash_aliases
 
-# Notify immedetely
-#set -o notify
+# Notify immedetely when background jobs exit
+set -o notify
 
 # Shell options
-#shopt -s cdspell                    # Check cd spelling
-#shopt -s extglob                    # Extended pattern matching
-#shopt -s histappend                 # Append history on exit
-#set +o histexpand
-#shopt -s hostcomplete               # Attempt to complete '@'
-#shopt -s interactive_comments       # Allow comments in interactive
-#shopt -u mailwarn                   # Don't tell me about mail, please.
-#shopt -s no_empty_cmd_completion    # Don't complete on an empty line.
-#shopt -s cdable_vars
+shopt -s cdspell                    # Check cd spelling
+shopt -s extglob                    # Extended pattern matching
+shopt -s histappend                 # Append history on exit
+shopt -s hostcomplete               # Attempt to complete hostname after '@'
+shopt -s interactive_comments       # Allow comments in interactive
+shopt -u mailwarn                   # Don't tell me about mail, please.
+shopt -s no_empty_cmd_completion    # Don't complete on an empty line.
 
-#unset MAILCHECK                     # Dont tell me about mail, please.
+unset MAILCHECK                     # Dont tell me about mail, please.
 
 #----------------------
-# PATH
+# PATH Extensions
 #----------------------
 
-# test -d "$HOME/devel/bin" && PATH="$HOME/devel/bin:$PATH"
+test -d "$HOME/bin" && PATH="$HOME/bin:$PATH"
+test -d "$HOME/devel/bin" && PATH="$HOME/devel/bin:$PATH"
 
 #----------------------
 # Environment Config
 #----------------------
 
 case "$-" in
-    *i*) INTERACTIVE=yes ;;
-    *) unset INTERACTIVE ;;
+    *i*) INTERACTIVE=yes ;; # This shell is interactive
+    *) unset INTERACTIVE ;; # This shell is not interactive
 esac
 
 case "$0" in
@@ -53,21 +45,10 @@ case "$0" in
     *) unset LOGIN ;;
 esac
 
-# Enable UTF locale
-: ${LANG:="en_US.UTF-8"}
-: ${LANGUAGE:="en"}
-: ${LC_CTYPE:="en_US.UTF-8"}
-: ${LC_ALL:="en_US.UTF-8"}
-export LANG LANGUAGE LC_CTYPE LC_ALL
-
-# Always use passive FTP
-: ${FTP_PASSIVE:=1}
-export FTP_PASSIVE
-
 # Some filetypes to ignore
 FIGNORE="~:CVS:#:.pyc:.swp:.swa"
 
-#HISTORY
+# HISTORY
 export HISTCONTROL="ignoreboth"                 # Ignore space and duplicates 
 export HISTSIZE=10000
 export HISTFILESIZE=10000
@@ -77,21 +58,19 @@ shopt -s cmdhist                                # Save multiline in one line
 shopt -s histreedit                             # Reedit failed substitution
 
 #--------------------
-# Pager and editor
+# Pager and Editor
 #--------------------
 
 HAVE_VIM=$(command -v vim)
 HAVE_GVIM=$(command -v gvim)
 HAVE_NANO=$(command -v nano)
 HAVE_MATE=$(command -v mate)
+HAVE_SUBL=$(command -v subl)
 
+# If no vim default to vi
 test -n "$HAVE_VIM" && EDITOR=vim || EDITOR=vi
-# test -n "$HAVE_VIM" && EDITOR=nano || EDITOR=vi
-# test -n "$HAVE_MATE" && EDITOR=mate || EDITOR=nano
-<<<<<<< HEAD
-EDITOR=vim
-=======
->>>>>>> 1faa16b8fb32dc4c5fb871d32fa241cdc85dc4bd
+# If sublime text and DISPLAY is set, override vim/vi
+test -n "$HAVE_SUBL" && test -n "$DISPLAY:+x" && EDITOR='subl -w'
 export EDITOR
 
 # PAGER
@@ -149,6 +128,7 @@ ps1_set --prompt ∫ --notime 'S\:\ '
 # Useful functions
 #----------------------
 
+# Pushes your ssh public key (ida) to the given remote host's authorized_keys
 push_ssh_cert() {
     local _host
     test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
@@ -160,21 +140,22 @@ push_ssh_cert() {
     done
 }
 
+# Extract... anything!
 extract () 
 {
     if [ -f $1 ] ; then
         case $1 in
-            *.tar.bz2)   tar xvjf $1        ;;
-            *.tar.gz)    tar xvzf $1     ;;
-            *.bz2)       bunzip2 $1       ;;
+            *.tar.bz2)   tar xvjf $1    ;;
+            *.tar.gz)    tar xvzf $1    ;;
+            *.bz2)       bunzip2 $1     ;;
             *.rar)       unrar x $1     ;;
-            *.gz)        gunzip $1     ;;
-            *.tar)       tar xvf $1        ;;
-            *.tbz2)      tar xvjf $1      ;;
-            *.tgz)       tar xvzf $1       ;;
-            *.zip)       unzip $1     ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xvf $1     ;;
+            *.tbz2)      tar xvjf $1    ;;
+            *.tgz)       tar xvzf $1    ;;
+            *.zip)       unzip $1       ;;
             *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1    ;;
+            *.7z)        7z x $1        ;;
             *)           echo "'$1' cannot be extracted via >extract<" ;;
         esac
     else
@@ -182,8 +163,8 @@ extract ()
     fi
 }
 
-function ii()   # Get current host related info.
-{
+# Get current host related info.
+function ii() {
     echo -e "\nYou are logged on ${RED}$HOST"
     echo -e "\nAdditionnal information:$NC " ; uname -a
     echo -e "\n${RED}Users logged on:$NC " ; w -h
@@ -194,24 +175,25 @@ function ii()   # Get current host related info.
 # -------------------------
 # Bash Completion 
 # -------------------------
-#test -z "$BASH_COMPLETION" && {
-#    bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
-#    test -n "$PS1" && test $bmajor -gt 1 && {
-#        # search for a bash_completion file to source
-#        for f in /usr/local/etc/bash_completion \
-#            /usr/pkg/etc/bash_completion \
-#            /opt/local/etc/bash_completion \
-#            /etc/bash_completion \
-#            ~/.bash_completion
-#        do
-#            test -f $f && {
-#                . $f
-#                break
-#            }
-#        done
-#    }
-#    unset bash bmajor bminor f
-#}
+test -z "$BASH_COMPLETION" && {
+   bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
+   test -n "$PS1" && test $bmajor -gt 1 && {
+       # search for a bash_completion file to source
+       for f in \
+           /usr/local/etc/bash_completion \
+           /usr/pkg/etc/bash_completion \
+           /opt/local/etc/bash_completion \
+           /etc/bash_completion \
+           ~/.bash_completion
+       do
+           test -f $f && {
+               . $f
+               break
+           }
+       done
+   }
+   unset bash bmajor bminor f
+}
 
 _expand() {
     return 0
@@ -222,42 +204,14 @@ _expand() {
 # Mac Specific
 #--------------------------
 
-# if [ "$UNAME" = Darwin ]; then
-    # export PATH="/usr/local/share/python:/usr/local/bin:$PATH"
-    # export CPATH="/usr/local/include:$CPATH"
-    
-    # Python 2.7
-    # rm /usr/local/bin/python
-    # ln -s /usr/bin/python2.7 /usr/local/bin/python
-    # export PYTHONPATH="/Library/Python/2.7/site-packages:$PYTHONPATH"
-    
-    # Python 2.6
-    # rm /usr/local/bin/python
-    # ln -s /usr/bin/python2.6 /usr/local/bin/python
-    # export PYTHONPATH="/Library/Python/2.6/site-packages:$PYTHONPATH"
-    
-    # Python 3.2
-    # rm /usr/local/bin/python
-    # ln -s /usr/local/bin/python3.2 /usr/local/bin/python
-    # export PATH="/usr/local/Cellar/python3/3.2.1/bin:$PATH"
-    # export PYTHONPATH="/usr/local/lib/python:$PYTHONPATH"
-    # test -x /opt/local -a ! -L /opt/local && {
-    #     PORTS=/opt/local
-    # 
-    #     PATH="$PORTS/bin:$PORTS/sbin:$PATH"
-    #     MANPATH="$PORTS/share/man:$MANPATH"
-    # 
-    #     export CPATH=$PORTS/include
-    #     export LIBRARY_PATH=$PORTS/lib
-    #     export LD_LIBRARY_PATH=$PORTS/lib
-    #     export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:$PORTS/lib:/usr/local/lib:/usr/lib
-    # 
-    # }
-# fi
+if [ "$UNAME" = Darwin ]; then
+    : # Do nothing for now
+    echo -e "\033]50;SetProfile=\a"
+fi
 
-# -------------------------
+# ---------------------------
 # Closing Notes/User Specific
-# -------------------------
+# ---------------------------
 
 # ROS Stuff
 test -r $HOME/.rosrc && . $HOME/.rosrc
@@ -268,19 +222,3 @@ test -n "$INTERACTIVE" -a -n "$LOGIN" && {
     uptime 2> /dev/null
 }
 
-<<<<<<< HEAD
-export PATH=~/bin:$PATH
-
-export PATH=/usr/local/bin:$PATH
-export PYTHONPATH="/usr/local/lib/wxPython-2.9.2.1/lib/python2.7/site-packages:/usr/local/lib/python2.7/site-packages:/usr/local/lib/python:$PYTHONPATH"
-export PATH=/usr/local/lib/wxPython/bin:$PATH
-export ROS_OS_OVERRIDE=osxbrew:lion
-#source /Users/william/devel/vis_exp/setup.bash
-
-add-ros-pkg-path () {
-    export ROS_PACKAGE_PATH=$PWD:$ROS_PACKAGE_PATH;
-}
-
-source /usr/share/git-core/git-completion.bash
-=======
->>>>>>> 1faa16b8fb32dc4c5fb871d32fa241cdc85dc4bd
