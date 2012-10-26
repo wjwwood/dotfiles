@@ -222,3 +222,8 @@ test -n "$INTERACTIVE" -a -n "$LOGIN" && {
     uptime 2> /dev/null
 }
 
+# Go
+export GOPATH=$HOME/devel/go:$GOPATH
+export PATH=$HOME/devel/go/bin:$PATH
+
+
