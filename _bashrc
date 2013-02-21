@@ -163,6 +163,10 @@ extract ()
     fi
 }
 
+function ssh_rsub() {
+    ssh -R 52698:localhost:52698 $1
+}
+
 # Get current host related info.
 function ii() {
     echo -e "\nYou are logged on ${RED}$HOST"
@@ -204,9 +208,12 @@ _expand() {
 # Mac Specific
 #--------------------------
 
-if [ "$UNAME" = Darwin ]; then
-    : # Do nothing for now
+if [ `uname` = Darwin ]; then
     echo -e "\033]50;SetProfile=\a"
+    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+    if which ccache >/dev/null; then
+        export PATH=/usr/local/Cellar/ccache/3.1.8/libexec:$PATH
+    fi
 fi
 
 # ---------------------------

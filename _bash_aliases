@@ -4,8 +4,16 @@ alias duh='du -chs ./*'
 alias fn='find . -name'
 alias hi='history | tail -20'
 alias flushdns='sudo dscacheutil -flushcache'
+
 alias mount.devel-precise='sshfs william@ciabatta-precise-vm:/home/william/devel ~/mnt/devel-precise -oauto_cache,reconnect,defer_permissions,negative_vncache,volname=devel-precise'
 alias umount.devel-precise='umount ~/mnt/devel-precise'
+
 alias mount.devel-quantal='sshfs william@ciabatta-quantal-vm:/home/william/devel ~/mnt/devel-quantal -oauto_cache,reconnect,defer_permissions,negative_vncache,volname=devel-quantal'
 alias umount.devel-quantal='umount ~/mnt/devel-quantal'
+
+alias mount.prk='sshfs wwoodall@prk:/ ~/mnt/prk -oauto_cache,reconnect,defer_permissions,negative_vncache,volname=prk'
+alias umount.prk='umount ~/mnt/prk'
+
+alias mount.lsd='sshfs wwoodall@lsd:/u/wwoodall/ ~/mnt/lsd -oauto_cache,reconnect,defer_permissions,negative_vncache,volname=lsd'
+alias umount.lsd='umount ~/mnt/lsd'
 
