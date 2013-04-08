@@ -162,13 +162,16 @@ set wrap
 set textwidth=79
 set formatoptions=qrn1
 if exists("&colorcolumn")
-    set colorcolumn=85
+    set colorcolumn=120
 endif
 
 nnoremap ; :
 
 " Faster ESC
 inoremap jj <ESC>
+
+" Paste over selected text
+vnoremap p "_dP
 
 " Some fixes for ROS Files
 au BufNewFile,BufRead *.launch setfiletype xml

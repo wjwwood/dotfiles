@@ -131,12 +131,12 @@ ps1_set --prompt ∫ --notime 'S\:\ '
 # Pushes your ssh public key (ida) to the given remote host's authorized_keys
 push_ssh_cert() {
     local _host
-    test -f ~/.ssh/id_dsa.pub || ssh-keygen -t dsa
+    test -f ~/.ssh/id_rsa.pub || ssh-keygen -t rsa
     for _host in "$@";
     do
         echo $_host
         ssh $_host 'touch ~/.ssh/authorized_keys'
-        ssh $_host 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_dsa.pub
+        ssh $_host 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
     done
 }
 
@@ -210,6 +210,7 @@ _expand() {
 
 if [ `uname` = Darwin ]; then
     echo -e "\033]50;SetProfile=\a"
+    export PATH=/usr/local/sbin:/usr/local/bin:/usr/local/share/python:$PATH
     export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
     if which ccache >/dev/null; then
         export PATH=/usr/local/Cellar/ccache/3.1.8/libexec:$PATH
