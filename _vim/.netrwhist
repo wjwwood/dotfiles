@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/home/mjcarroll/.vim'
-let g:netrw_dirhist_2='/home/mjcarroll/.gvfs/giga on cobalt'
-let g:netrw_dirhist_3='/private/tmp/ogre-c8lh/ogre_src_v1-7-4/CMake'
-let g:netrw_dirhist_4='/Users/william/ros_catkin_ws/src/rosconsole'
-let g:netrw_dirhist_5='/Users/william/devel/bloom'

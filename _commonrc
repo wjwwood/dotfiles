@@ -1,0 +1,118 @@
+# Aliases
+source ~/.aliases
+
+#----------------------
+# PATH Extensions
+#----------------------
+
+test -d "$HOME/bin" && PATH="$HOME/bin:$PATH"
+test -d "$HOME/.bin" && PATH="$HOME/.bin:$PATH"
+test -d "$HOME/devel/bin" && PATH="$HOME/devel/bin:$PATH"
+
+#--------------------
+# Pager and Editor
+#--------------------
+
+HAVE_VIM=$(command -v vim)
+HAVE_GVIM=$(command -v gvim)
+HAVE_NANO=$(command -v nano)
+HAVE_MATE=$(command -v mate)
+HAVE_SUBL=$(command -v subl)
+
+# If no vim default to vi
+test -n "$HAVE_VIM" && EDITOR=vim || EDITOR=vi
+# If sublime text and DISPLAY is set, override vim/vi
+test -n "$HAVE_SUBL" && test -n "$DISPLAY:+x" && EDITOR='subl -w'
+export EDITOR
+
+# PAGER
+if test -n "$(command -v less)" ; then
+    PAGER="less -FirSwX"
+    MANPAGER="less -FiRswX"
+else
+    PAGER=more
+    MANPAGER="$PAGER"
+fi
+export PAGER MANPAGER
+
+# Ack
+ACK_PAGER="$PAGER"
+ACK_PAGER_COLOR="$PAGER"
+
+export CLICOLOR="yes"
+
+#----------------------
+# Useful functions
+#----------------------
+
+# Pushes your ssh public key (ida) to the given remote host's authorized_keys
+push_ssh_cert()
+{
+    local _host
+    test -f ~/.ssh/id_rsa.pub || ssh-keygen -t rsa
+    for _host in "$@";
+    do
+        echo $_host
+        ssh $_host 'touch ~/.ssh/authorized_keys'
+        ssh $_host 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+    done
+}
+
+# Extract... anything!
+extract () 
+{
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xvjf $1    ;;
+            *.tar.gz)    tar xvzf $1    ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       unrar x $1     ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xvf $1     ;;
+            *.tbz2)      tar xvjf $1    ;;
+            *.tgz)       tar xvzf $1    ;;
+            *.zip)       unzip $1       ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1        ;;
+            *)           echo "'$1' cannot be extracted via >extract<" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# Get current host related info.
+function ii ()
+{
+    echo -e "\nYou are logged on ${RED}$HOST"
+    echo -e "\nAdditionnal information:$NC " ; uname -a
+    echo -e "\n${RED}Users logged on:$NC " ; w -h
+    echo -e "\n${RED}Current date :$NC " ; date
+    echo -e "\n${RED}Machine stats :$NC " ; uptime
+}
+
+#--------------------------
+# Mac Specific
+#--------------------------
+
+if [ `uname` = Darwin ]; then
+	# echo -e "\033]50;SetProfile=\a"
+	export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+	# export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+	# if which ccache >/dev/null; then
+	#    export PATH=/usr/local/Cellar/ccache/3.1.8/libexec:$PATH
+	# fi
+fi
+
+# ---------------------------
+# Closing Notes/User Specific
+# ---------------------------
+
+# ROS Stuff
+test -r $HOME/.rosrc && . $HOME/.rosrc
+
+# Go
+export GOPATH=$HOME/devel/go:$GOPATH
+export PATH=$HOME/devel/go/bin:$PATH
+
+

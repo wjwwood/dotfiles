@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
 function link_file {
     source="${PWD}/$1"
     target="${HOME}/${1/_/.}"
@@ -10,25 +11,7 @@ function link_file {
     ln -sf ${source} ${target}
 }
 
-if [ "$1" = "vim" ]; then
-    for i in _vim*
-    do
-       link_file $i
-    done
-else
-    for i in _*
-    do
-        link_file $i
-    done
-fi
-
-git submodule sync
-git submodule init
-git submodule update
-git submodule foreach git pull origin master
-git submodule foreach git submodule init
-git submodule foreach git submodule update
-
-#setup command-t
-cd _vim/bundle/command-t
-rake make
+for i in _*
+do
+    link_file $i
+done

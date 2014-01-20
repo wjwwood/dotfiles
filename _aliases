@@ -1,0 +1,4 @@
+alias df='df -H'
+alias duh='du -chs ./*'
+alias fn='find . -name'
+alias flushdns='sudo dscacheutil -flushcache'
