@@ -25,3 +25,6 @@
     diff = auto
     interactive = auto
     status = auto
+
+[credential "https://github.com"]
+	username = wjwwood

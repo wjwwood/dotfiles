@@ -29,6 +29,14 @@ Install the package manger: https://sublime.wbond.net/installation
 Install these packages:
 
 - SublimeLinter
-- SublimeLinter-Annotations
-- SublimeLinter-PEP8
+- SublimeLinter-annotations
+- SublimeLinter-pep8
+- SublimeLinter-flake8
+- SublimeLinter-pyyaml
+- SublimeCodeIntel
+- SublimeClang (must clone manually: https://github.com/quarnster/SublimeClang)
+- VCSGutter
 
+# Other References
+
+https://code.google.com/p/iterm2/wiki/Keybindings
