@@ -69,4 +69,6 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 ## Customizations ##
 
+unsetopt share_history
+
 source ~/.commonrc
