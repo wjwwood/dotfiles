@@ -7,7 +7,7 @@ First I clone this repository into a folder in my home directory (it must live h
 Then I run the `install.sh` file in this repository:
 
 ```
-$ sh install.sh
+$ bash install.bash
 ```
 
 This will link any files or folder in this repository which begin with an `_` into the home directory, replacing the leading `_` with a `.`.
