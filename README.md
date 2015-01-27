@@ -18,7 +18,9 @@ My `zsh` configurations require oh-my-zsh to be installed. See this: https://git
 
 # oh-my-zsh theme
 
-Once oh-my-zsh is installed, cp or link the `oh-my-zsh/themese/wjwwood.zsh-theme` file from this repository into the `~/.oh-my-zsh/themes` folder.
+The ZSH theme should be set automatically because it is stored in `_custom.oh-my-zsh/themes/wjwwood.zsh-theme`.
+
+However, if it is not, `cp` or link the `_custom.oh-my-zsh/themes/wjwwood.zsh-theme` file from this repository into the `~/.oh-my-zsh/themes` folder.
 
 # Sublime Text 3
 
