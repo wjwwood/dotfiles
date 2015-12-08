@@ -7,7 +7,7 @@
 alias rosenv='env | grep ROS'
 alias rviz='rosrun rviz rviz'
 alias xacro='rosrun xacro xacro.py'
-alias groovy='source ~/groovy/ros_catkin_ws/install_isolated/setup.zsh'
+alias indigo='source ~/indigo/install/setup.zsh'
 
 rosipython () {
     if [[ -z $1 ]]; then

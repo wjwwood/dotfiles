@@ -112,7 +112,9 @@ fi
 test -r $HOME/.rosrc && . $HOME/.rosrc
 
 # Go
-export GOPATH=$HOME/devel/go:$GOPATH
-export PATH=$HOME/devel/go/bin:$PATH
+#export GOPATH=$HOME/devel/go:$GOPATH
+#export PATH=$HOME/devel/go/bin:$PATH
+
+test -d /usr/local/opt/ccache/libexec && export PATH=/usr/local/opt/ccache/libexec:$PATH
 
 
