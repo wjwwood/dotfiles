@@ -117,4 +117,5 @@ test -r $HOME/.rosrc && . $HOME/.rosrc
 
 test -d /usr/local/opt/ccache/libexec && export PATH=/usr/local/opt/ccache/libexec:$PATH
 
+ROS_DOMAIN_ID=87
 
