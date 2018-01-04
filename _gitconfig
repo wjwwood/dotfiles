@@ -1,6 +1,7 @@
 [user]
 	name = William Woodall
 	email = william@osrfoundation.org
+	signingkey = A8E776C771A20D63
 
 [core]
     pager = cat

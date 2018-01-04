@@ -119,3 +119,5 @@ test -d /usr/local/opt/ccache/libexec && export PATH=/usr/local/opt/ccache/libex
 
 export ROS_DOMAIN_ID=87
 
+export GPG_TTY=$(tty)
+
