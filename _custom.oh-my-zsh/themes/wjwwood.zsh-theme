@@ -10,6 +10,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY=" %{%F{red}%}*%{%f%k%b%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 function git_vcs_info() {
+  local DYLD_LIBRARY_PATH;  # this prevents a long DYLD_LIBRARY_PATH from slowing git down...
   if $(is_git); then
     branch=$(git symbolic-ref HEAD 2> /dev/null) || \
     branch="(no branch)"
